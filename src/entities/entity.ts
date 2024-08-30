@@ -64,15 +64,15 @@ abstract class Entity extends Sprite {
         this.checkForVerticalCollisions();
 
         /** see hitbox */
-        if (c) {
-            c.fillStyle = "rgba(255,0,0,0.5)";
-            c.fillRect(
-                this.hitbox.position.x,
-                this.hitbox.position.y,
-                this.hitbox.width,
-                this.hitbox.height
-            );
-        }
+        // if (c) {
+        //     c.fillStyle = "rgba(255,0,0,0.5)";
+        //     c.fillRect(
+        //         this.hitbox.position.x,
+        //         this.hitbox.position.y,
+        //         this.hitbox.width,
+        //         this.hitbox.height
+        //     );
+        // }
     }
 
     private updateHitbox() {
