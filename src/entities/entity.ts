@@ -1,6 +1,6 @@
 import Sprite from "./sprite/sprite";
 
-class Entity extends Sprite {
+abstract class Entity extends Sprite {
     protected position;
 
     protected gravity;
@@ -145,8 +145,6 @@ class Entity extends Sprite {
         }
     }
 
-    protected changeAnimation(type: string) {}
-
     protected onCollideHorizontally({
         direction = "",
         block: collisionBlock,
@@ -198,7 +196,9 @@ class Entity extends Sprite {
         }
     }
 
-    setVelocityX(value: number) {
+    protected abstract changeAnimation(type: string): void;
+
+    public setVelocityX(value: number) {
         this.velocity.x = value;
     }
 
@@ -206,7 +206,7 @@ class Entity extends Sprite {
         this.velocity.y = value;
     }
 
-    getVelocity() {
+    public getVelocity() {
         return this.velocity;
     }
 

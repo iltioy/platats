@@ -108,7 +108,6 @@ class Player extends Entity {
         }
 
         let newCollisions = [];
-        // console.log(entities);
 
         for (let i = 0; i < entities.length; i++) {
             let entity = entities[i];
@@ -129,8 +128,6 @@ class Player extends Entity {
             );
         }
 
-        // console.log(newCollisions);
-
         this.collisionBlocks = [
             ...this.defaultCollisionBlocks,
             ...newCollisions,
@@ -138,7 +135,6 @@ class Player extends Entity {
     }
 
     protected onCollideVertically({ block }: any) {
-        // console.log(this.isAvlive);
         super.onCollideVertically({ block });
 
         if (!block) return;
@@ -187,8 +183,6 @@ class Player extends Entity {
     }
 
     private handleLifeDrop() {
-        // if (this.lives <= 0) return;
-
         this.isInvinsible = true;
         this.isAlfaBlinkEnabled = true;
         this.lives--;
@@ -211,23 +205,31 @@ class Player extends Entity {
         console.log(this.pickedCoins);
     }
 
-    getPickedCoins() {
+    public getPickedCoins() {
         return this.pickedCoins;
     }
 
-    getCollidedLevelChange() {
+    public getCoinsNumber() {
+        return this.coinsCount;
+    }
+
+    public getLives() {
+        return this.lives;
+    }
+
+    public getCollidedLevelChange() {
         return this.collidedLevelChange;
     }
 
-    setPosition(position: any) {
+    public setPosition(position: any) {
         this.position = position;
     }
 
-    setDefaultCollisionBlocks(blocks: any) {
+    public setDefaultCollisionBlocks(blocks: any) {
         this.defaultCollisionBlocks = blocks;
     }
 
-    setCollidedLevelChange(collided: any) {
+    public setCollidedLevelChange(collided: any) {
         this.collidedLevelChange = collided;
     }
 }

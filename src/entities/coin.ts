@@ -33,6 +33,8 @@ class Coin extends Entity {
 
         this.frameBuffer = 20;
     }
+
+    protected changeAnimation(type: string): void {}
 }
 
 export default Coin;

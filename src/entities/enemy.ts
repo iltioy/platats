@@ -1,6 +1,6 @@
 import Entity from "./entity";
 
-class Enemy extends Entity {
+abstract class Enemy extends Entity {
     constructor({
         position,
         collisionBlocks,
@@ -26,7 +26,7 @@ class Enemy extends Entity {
         });
     }
 
-    onCollideHorizontally({ direction = "", block = null }) {
+    protected onCollideHorizontally({ direction = "", block = null }) {
         super.onCollideHorizontally({ direction, block });
 
         if (!direction) return;
@@ -39,11 +39,11 @@ class Enemy extends Entity {
         }
     }
 
-    onCollideVertically({ block }: any) {
+    protected onCollideVertically({ block }: any) {
         super.onCollideVertically({ block });
     }
 
-    changeAnimation(type: string) {}
+    protected abstract changeAnimation(type: string): void;
 }
 
 export default Enemy;

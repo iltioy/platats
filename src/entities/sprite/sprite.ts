@@ -34,7 +34,6 @@ class Sprite {
     }: any) {
         this.position = position;
         this.image = new Image();
-        console.log(imageSrc);
 
         this.image.src = imageSrc;
         this.loaded = false;
@@ -56,7 +55,7 @@ class Sprite {
         };
     }
 
-    draw(c: CanvasRenderingContext2D) {
+    draw(c: CanvasRenderingContext2D, data: any = null) {
         if (!this.loaded) return;
 
         const cropbox = {

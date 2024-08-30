@@ -1,5 +1,6 @@
 import { collisionsLevel1, collisionsLevel1Enemy } from "./data/collitions";
 import Coin from "./entities/coin";
+import Player from "./entities/player";
 import Sprite from "./entities/sprite/sprite";
 import Troll from "./entities/troll";
 import Yeti from "./entities/yeti";
@@ -51,15 +52,8 @@ const backgroundImage = new Sprite({
     imageSrc: "./src/assets/test_map3.png",
 });
 
-const level1 = new Level({
-    collisionBlocksPlayer: collisionBlocksL1,
-    collisionBlocksEntities: collisionsBlcoksForEnemyL1,
-    backgroundImage,
-    playerPosition: {
-        x: 100,
-        y: 100,
-    },
-    rightLevel: new Level({
+const createDefaultLevel = () => {
+    return new Level({
         collisionBlocksPlayer: collisionBlocksL1,
         collisionBlocksEntities: collisionsBlcoksForEnemyL1,
         backgroundImage,
@@ -67,9 +61,33 @@ const level1 = new Level({
             x: 100,
             y: 100,
         },
+        rightLevel: new Level({
+            collisionBlocksPlayer: collisionBlocksL1,
+            collisionBlocksEntities: collisionsBlcoksForEnemyL1,
+            backgroundImage,
+            playerPosition: {
+                x: 100,
+                y: 100,
+            },
+            entities: [troll, coin, yeti],
+        }),
         entities: [troll, coin, yeti],
-    }),
-    entities: [troll, coin, yeti],
-});
+    });
+};
 
-export { level1 };
+const createDefaultPlayer = (level: Level) => {
+    return new Player({
+        position: {
+            x: level.getPlayerPosition().x,
+            y: level.getPlayerPosition().y,
+        },
+        collisionBlocks: level.getCollisionBlocksPlayer(),
+        framerate: 7,
+        animationsNumber: 6,
+        gravity: 0.8,
+    });
+};
+
+const level1 = createDefaultLevel();
+
+export { level1, createDefaultLevel, createDefaultPlayer };
