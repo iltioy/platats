@@ -1,9 +1,8 @@
 import Sprite from "./entities/sprite/sprite";
 import Game from "./game";
-import Level from "./levels/collisions/level";
 import { createDefaultLevel } from "./maps/maps";
 
-const startGame = (level1: Level) => {
+const startGame = () => {
     const canvas = document.querySelector("canvas");
 
     if (!canvas) return;

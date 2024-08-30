@@ -11,13 +11,6 @@ class Bar extends Sprite {
         });
 
         this.type = type;
-        // this.sprite = new Sprite({
-        //     imageSrc: "./src/assets/heart.png",
-        //     position: {
-        //         x: 100,
-        //         y: 40,
-        //     },
-        // });
         this.frameBuffer = 100000000000;
     }
 
