@@ -13,6 +13,8 @@ class Level {
 
     private levelMap;
 
+    private type;
+
     constructor({
         collisionBlocksPlayer,
         collisionBlocksEntities,
@@ -22,16 +24,18 @@ class Level {
         rightLevel = null,
         leftLevel = null,
         topLevel = null,
-        bottomtLevel = null,
+        bottomLevel = null,
+        type = "none",
     }: any) {
         this.collisionBlocksPlayer = collisionBlocksPlayer;
         this.collisionBlocksEntities = collisionBlocksEntities;
         this.backgroundImage = backgroundImage;
         this.playerPosition = playerPosition;
         this.entities = entities;
+        this.type = type;
 
         this.levelMap = {
-            "level-change-bottom": bottomtLevel,
+            "level-change-bottom": bottomLevel,
             "level-change-right": rightLevel,
             "level-change-left": leftLevel,
             "level-change-top": topLevel,
@@ -60,6 +64,10 @@ class Level {
 
     public getLevelMap(): any {
         return this.levelMap;
+    }
+
+    public getType() {
+        return this.type;
     }
 }
 

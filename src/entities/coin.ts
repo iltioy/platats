@@ -3,10 +3,10 @@ import Entity from "./entity";
 class Coin extends Entity {
     constructor({
         position,
-        collisionBlocks,
+        collisionBlocks = [],
         imageSrc = "./src/assets/coin/moneta.png",
-        framerate,
-        animationsNumber,
+        framerate = 5,
+        animationsNumber = 1,
         id,
         gravity = 0,
     }: any) {

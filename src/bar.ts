@@ -26,13 +26,13 @@ class Bar extends Sprite {
 
         if (this.type === "heart") {
             c.fillStyle = "red";
-            c.font = "bold 67px roboto Courier";
+            c.font = "bold 67px Courier";
             c.fillText(String(data), 50, 95);
         }
 
         if (this.type === "coin") {
             c.fillStyle = "yellow";
-            c.font = "bold 67px roboto Courier";
+            c.font = "bold 67px Courier";
             c.fillText(String(data), 210, 95);
         }
     }

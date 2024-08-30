@@ -5,7 +5,7 @@ import Sprite from "./entities/sprite/sprite";
 import InputHandler from "./inputhandler";
 // import CollisionBlock from "./levels/collisions/collisionBlock";
 import Level from "./levels/collisions/level";
-import { createDefaultLevel, createDefaultPlayer } from "./maps";
+import { createDefaultLevel, createDefaultPlayer } from "./maps/maps";
 
 interface GameTypes {
     level: Level;
@@ -85,6 +85,8 @@ class Game {
             this.renderMainScene(c);
         } else if (this.scene === "died") {
             this.renderDieScene(c);
+        } else if (this.scene === "finish") {
+            this.renderFinishScene(c);
         }
     }
 
@@ -94,6 +96,18 @@ class Game {
 
     private renderDieScene(c: CanvasRenderingContext2D) {
         this.deathSceneSprite.draw(c);
+    }
+
+    private renderFinishScene(c: CanvasRenderingContext2D) {
+        c.fillStyle = "black";
+        c.fillRect(0, 0, 1088, 768);
+        c.fillStyle = "white";
+
+        c.font = "bold 86px Courier";
+        let textLine1 = "Уровень пройден!";
+        c.fillText(textLine1, 544 - c.measureText(textLine1).width / 2, 325);
+        let textLine2 = `Собранные монеты: ${this.player.getCoinsNumber()}`;
+        c.fillText(textLine2, 544 - c.measureText(textLine2).width / 2, 425);
     }
 
     private renderMainScene(c: CanvasRenderingContext2D) {
@@ -136,7 +150,7 @@ class Game {
     public handleContinue() {
         if (this.scene === "start") {
             this.scene = "main";
-        } else if (this.scene === "died") {
+        } else if (this.scene === "died" || this.scene === "finish") {
             this.isRestart = true;
         }
     }
@@ -152,10 +166,9 @@ class Game {
 
     handleLevelChange() {
         if (this.player.getCollidedLevelChange().length !== 0) {
-            console.log("sdfsdf");
-
             let level: string = this.player.getCollidedLevelChange()[0];
             console.log(level);
+            console.log(this.currentLevel.getLevelMap());
 
             if (
                 this.currentLevel &&
@@ -164,13 +177,21 @@ class Game {
             ) {
                 console.log("veve");
 
-                this.currentLevel = this.currentLevel.getLevelMap()[level];
+                this.currentLevel = this.currentLevel.getLevelMap()[level]();
                 console.log("CURE", this.currentLevel);
 
                 this.player.setPosition(this.currentLevel.getPlayerPosition());
                 this.player.setDefaultCollisionBlocks(
                     this.currentLevel.getCollisionBlocksPlayer()
                 );
+
+                if (level === "level-change-top") {
+                    this.player.setVelocityY(-20);
+                }
+
+                if (this.currentLevel.getType() === "finish") {
+                    this.scene = "finish";
+                }
             }
 
             this.player.setCollidedLevelChange([]);
